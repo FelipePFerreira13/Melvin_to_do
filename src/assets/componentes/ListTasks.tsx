@@ -174,7 +174,7 @@ export function ListTasks(props: ListTasksProps) {
           <div key={stepNome} className="w-full">
             <Card>
               <h3
-                className="text-base sm:text-lg md:text-xl font-bold mb-2.5 sm:mb-3 md:mb-4 text-center break-words"
+                className="text-base sm:text-lg md:text-xl font-bold mb-2.5 sm:mb-3 md:mb-4 text-center wrap-break-word"
                 style={{ color: coresPorStep[stepNome] }}
               >
                 {stepNome}
@@ -192,10 +192,10 @@ export function ListTasks(props: ListTasksProps) {
                         borderColor: coresPorStep[stepNome]
                       }}
                     >
-                      <h4 className="font-bold mb-1 sm:mb-1.5 md:mb-2 text-xs sm:text-sm md:text-base break-words" style={{ color: "#1e40af" }}>
+                      <h4 className="font-bold mb-1 sm:mb-1.5 md:mb-2 text-xs sm:text-sm md:text-base wrap-break-word" style={{ color: "#1e40af" }}>
                         {task.title}
                       </h4>
-                      <p className="text-xs sm:text-sm mb-2 sm:mb-2.5 md:mb-3 break-words" style={{ color: "#1e3a8a" }}>
+                      <p className="text-xs sm:text-sm mb-2 sm:mb-2.5 md:mb-3 wrap-break-word" style={{ color: "#1e3a8a" }}>
                         {task.description}
                       </p>
                       <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
