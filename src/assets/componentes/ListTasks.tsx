@@ -2,13 +2,22 @@ import { useEffect, useState } from "react";
 import { Card } from "./Card";
 import toast from "react-simple-toasts";
 
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  step: "Para fazer" | "Em andamento" | "Pronto";
+}
+
+type TaskStep = "Para fazer" | "Em andamento" | "Pronto";
+
 type ListTasksProps = {
   tarefaCriadaFlag: boolean;
   toggleTarefaCriadaFlag: Function;
 };
 
 export function ListTasks(props: ListTasksProps) {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   async function carregaTarefas() {
     const resposta = await fetch(
@@ -123,13 +132,13 @@ export function ListTasks(props: ListTasksProps) {
     }
   }, [props.tarefaCriadaFlag]);
 
-  const tarefasPorStep = {
+  const tarefasPorStep: Record<TaskStep, Task[]> = {
     "Para fazer": tasks.filter((task) => task.step === "Para fazer"),
     "Em andamento": tasks.filter((task) => task.step === "Em andamento"),
     "Pronto": tasks.filter((task) => task.step === "Pronto"),
   };
 
-  const coresPorStep = {
+  const coresPorStep: Record<TaskStep, string> = {
     "Para fazer": "#ef4444",
     "Em andamento": "#f59e0b",
     "Pronto": "#10b981",
@@ -161,7 +170,7 @@ export function ListTasks(props: ListTasksProps) {
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
-        {Object.keys(tarefasPorStep).map((stepNome) => (
+        {(Object.keys(tarefasPorStep) as TaskStep[]).map((stepNome) => (
           <div key={stepNome} className="w-full">
             <Card>
               <h3
